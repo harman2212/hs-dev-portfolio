@@ -10,6 +10,9 @@ const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 const GITHUB_USERNAME = "harman2212";
 
+// Repos to hide from the Projects section (portfolio website itself)
+const HIDDEN_REPOS = ["hs-dev-portfolio"];
+
 async function fetchGitHubData() {
   // Check cache first
   if (cachedData && Date.now() - cachedData.timestamp < CACHE_DURATION) {
@@ -95,9 +98,14 @@ async function fetchGitHubData() {
   const profile = await profileRes.json();
   const repos = await reposRes.json();
 
+  // Filter out the portfolio repo itself
+  const filteredRepos = repos.filter(
+    (repo: { name: string }) => !HIDDEN_REPOS.includes(repo.name)
+  );
+
   const data = {
     profile,
-    repos,
+    repos: filteredRepos,
     timestamp: Date.now(),
   };
 
