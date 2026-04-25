@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Heart } from "lucide-react";
+import { Github, Mail, Phone, Heart } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const currentYear = new Date().getFullYear();
@@ -54,15 +54,29 @@ export function Footer() {
 
           {/* Social */}
           <div className="flex items-center justify-start sm:justify-end gap-3">
-            <button
-              onClick={() =>
-                window.open("https://github.com/harman2212", "_blank")
-              }
+            <a
+              href="mailto:hs9961984@gmail.com"
+              className="p-2 rounded-lg text-muted-foreground hover:text-emerald-500 hover:bg-emerald-500/10 transition-all"
+            >
+              <Mail className="size-5" />
+              <span className="sr-only">Email</span>
+            </a>
+            <a
+              href="tel:+919464741376"
+              className="p-2 rounded-lg text-muted-foreground hover:text-emerald-500 hover:bg-emerald-500/10 transition-all"
+            >
+              <Phone className="size-5" />
+              <span className="sr-only">Phone</span>
+            </a>
+            <a
+              href="https://github.com/harman2212"
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-2 rounded-lg text-muted-foreground hover:text-emerald-500 hover:bg-emerald-500/10 transition-all"
             >
               <Github className="size-5" />
               <span className="sr-only">GitHub</span>
-            </button>
+            </a>
           </div>
         </div>
 

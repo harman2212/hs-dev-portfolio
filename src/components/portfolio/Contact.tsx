@@ -1,11 +1,27 @@
 "use client";
 
-import { Github, Mail, ExternalLink, Send } from "lucide-react";
+import { Github, Mail, Phone, ExternalLink, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollAnimation } from "./ScrollAnimation";
 
 const contactOptions = [
+  {
+    name: "Email",
+    description: "hs9961984@gmail.com",
+    href: "mailto:hs9961984@gmail.com",
+    icon: Mail,
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-500/10",
+  },
+  {
+    name: "Phone",
+    description: "+91 9464741376",
+    href: "tel:+919464741376",
+    icon: Phone,
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-500/10",
+  },
   {
     name: "GitHub",
     description: "Check out my open source work and contributions",
@@ -13,14 +29,6 @@ const contactOptions = [
     icon: Github,
     color: "text-white dark:text-neutral-200",
     bgColor: "bg-neutral-800 dark:bg-neutral-700",
-  },
-  {
-    name: "Email",
-    description: "Get in touch for project discussions",
-    href: "mailto:harman@example.com",
-    icon: Mail,
-    color: "text-emerald-500",
-    bgColor: "bg-emerald-500/10",
   },
 ];
 
@@ -53,7 +61,7 @@ export function Contact() {
         <div className="max-w-3xl mx-auto space-y-8">
           {/* Contact cards */}
           <ScrollAnimation stagger>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-3 gap-4">
               {contactOptions.map((option) => (
                 <Card
                   key={option.name}
@@ -124,7 +132,7 @@ export function Contact() {
                       asChild
                     >
                       <a
-                        href="mailto:harman@example.com"
+                        href="mailto:hs9961984@gmail.com"
                       >
                         <Mail className="size-4" />
                         Send Email
