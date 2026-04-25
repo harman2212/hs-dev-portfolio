@@ -10,7 +10,7 @@ const profileData = {
   avatar: "https://avatars.githubusercontent.com/u/133370119?v=4",
   name: "Harman",
   location: "India, Punjab",
-  bio: "I'm a passionate Full Stack Developer specializing in building modern web applications with Next.js, TypeScript, and AI integration. I love turning complex problems into elegant, user-friendly solutions. With experience in both frontend and backend technologies, I deliver end-to-end solutions that are scalable, performant, and visually stunning. Currently available for freelance projects and open to exciting collaborations.",
+  bio: "Full Stack Developer specializing in Next.js, TypeScript, React & AI. Open to freelance projects. I love turning complex problems into elegant, user-friendly solutions. With experience in both frontend and backend technologies, I deliver end-to-end solutions that are scalable, performant, and visually stunning.",
   company: "Freelance Full Stack Developer",
   stats: [
     { label: "Public Repos", value: "2+", icon: FolderGit2 },

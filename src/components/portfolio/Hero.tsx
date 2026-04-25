@@ -10,7 +10,7 @@ const profileData = {
   name: "Harman",
   title: "Full Stack Developer & AI Enthusiast",
   tagline:
-    "I build modern, scalable web applications with Next.js, TypeScript, and AI integration. Turning ideas into pixel-perfect, performant digital experiences.",
+    "Full Stack Developer specializing in Next.js, TypeScript, React & AI. Open to freelance projects.",
   github: "https://github.com/harman2212",
 };
 

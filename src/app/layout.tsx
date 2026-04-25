@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Harman | Full Stack Developer - Portfolio",
   description:
-    "Full Stack Developer specializing in Next.js, TypeScript, React, and AI applications. Available for freelance work.",
+    "Full Stack Developer specializing in Next.js, TypeScript, React & AI. Open to freelance projects.",
   keywords: [
     "Harman",
     "Full Stack Developer",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Harman | Full Stack Developer - Portfolio",
     description:
-      "Full Stack Developer specializing in Next.js, TypeScript, React, and AI applications. Available for freelance work.",
+      "Full Stack Developer specializing in Next.js, TypeScript, React & AI. Open to freelance projects.",
     url: "https://github.com/harman2212",
     siteName: "Harman's Portfolio",
     type: "website",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Harman | Full Stack Developer - Portfolio",
     description:
-      "Full Stack Developer specializing in Next.js, TypeScript, React, and AI applications.",
+      "Full Stack Developer specializing in Next.js, TypeScript, React & AI. Open to freelance projects.",
   },
 };
 
