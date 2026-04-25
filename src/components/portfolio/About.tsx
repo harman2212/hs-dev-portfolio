@@ -40,15 +40,13 @@ export function About() {
             className="md:col-span-2 flex flex-col items-center md:items-start gap-6"
           >
             <div className="relative">
-              <div className="absolute -inset-2 bg-gradient-to-br from-emerald-500/20 to-emerald-400/20 rounded-2xl blur-xl" />
-              <div className="relative p-1 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-400">
-                <Avatar className="size-48 sm:size-56 ring-4 ring-background">
-                  <AvatarImage src={profileData.avatar} alt={profileData.name} />
-                  <AvatarFallback className="text-4xl font-bold bg-emerald-500 text-white">
-                    H
-                  </AvatarFallback>
-                </Avatar>
-              </div>
+              <div className="absolute -inset-1.5 bg-gradient-to-br from-emerald-500 to-emerald-400 rounded-full blur-sm opacity-60" />
+              <Avatar className="relative size-48 sm:size-56 ring-4 ring-background">
+                <AvatarImage src={profileData.avatar} alt={profileData.name} />
+                <AvatarFallback className="text-4xl font-bold bg-emerald-500 text-white">
+                  H
+                </AvatarFallback>
+              </Avatar>
             </div>
 
             <div className="text-center md:text-left space-y-3">

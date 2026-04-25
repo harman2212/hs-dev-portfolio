@@ -83,7 +83,7 @@ export function Contact() {
                         <h3 className="font-semibold mb-1 group-hover:text-emerald-500 transition-colors">
                           {option.name}
                         </h3>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-sm text-muted-foreground whitespace-nowrap">
                           {option.description}
                         </p>
                       </div>
@@ -117,7 +117,7 @@ export function Contact() {
                       asChild
                     >
                       <a
-                        href="https://www.fiverr.com/"
+                        href="https://www.fiverr.com/harman2421"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
