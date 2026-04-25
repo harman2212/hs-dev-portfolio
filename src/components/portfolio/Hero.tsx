@@ -190,8 +190,7 @@ export function Hero() {
             >
               <a
                 href="https://www.fiverr.com/harman2421"
-                target="_blank"
-                rel="noopener noreferrer"
+                target="_self"
               >
                 Hire Me on Fiverr
                 <ExternalLink className="size-4" />

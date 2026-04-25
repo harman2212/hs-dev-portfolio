@@ -16,7 +16,7 @@ const contactOptions = [
   },
   {
     name: "Phone",
-    description: "+91 9464741376",
+    description: "+91 9464741376",
     href: "tel:+919464741376",
     icon: Phone,
     color: "text-emerald-500",
@@ -65,25 +65,25 @@ export function Contact() {
               {contactOptions.map((option) => (
                 <Card
                   key={option.name}
-                  className="bg-card/50 border-border/50 backdrop-blur-sm hover:border-emerald-500/30 transition-all duration-300 group cursor-pointer"
+                  className="bg-card/50 border-border/50 backdrop-blur-sm hover:border-emerald-500/30 transition-all duration-300 group cursor-pointer min-w-0"
                 >
                   <CardContent className="p-6">
                     <a
                       href={option.href}
-                      target="_blank"
+                      target={option.name === "Phone" ? "_self" : "_blank"}
                       rel="noopener noreferrer"
                       className="flex items-start gap-4"
                     >
                       <div
-                        className={`p-3 rounded-xl ${option.bgColor} group-hover:scale-110 transition-transform`}
+                        className={`p-3 rounded-xl shrink-0 ${option.bgColor} group-hover:scale-110 transition-transform`}
                       >
                         <option.icon className={`size-5 ${option.color}`} />
                       </div>
-                      <div className="flex-1 min-w-0">
+                      <div className="flex-1 min-w-0 overflow-hidden">
                         <h3 className="font-semibold mb-1 group-hover:text-emerald-500 transition-colors">
                           {option.name}
                         </h3>
-                        <p className="text-sm text-muted-foreground whitespace-nowrap">
+                        <p className="text-sm text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis">
                           {option.description}
                         </p>
                       </div>
@@ -118,8 +118,7 @@ export function Contact() {
                     >
                       <a
                         href="https://www.fiverr.com/harman2421"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target="_self"
                       >
                         Hire Me on Fiverr
                         <ExternalLink className="size-4" />
