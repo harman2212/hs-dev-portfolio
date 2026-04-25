@@ -91,6 +91,16 @@ export function Footer() {
             <Heart className="size-3.5 text-red-500 fill-red-500" />
             <span>using</span>
             <span className="font-medium text-emerald-500">Next.js</span>
+            <span className="mx-2 text-border">|</span>
+            <a
+              href="https://github.com/harman2212/hs-dev-portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 hover:text-emerald-500 transition-colors"
+            >
+              <Github className="size-3.5" />
+              <span>Source Code</span>
+            </a>
           </div>
         </div>
       </div>
