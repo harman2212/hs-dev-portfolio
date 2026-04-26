@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView, type Variants } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
 interface ScrollAnimationProps {
   children: React.ReactNode;
@@ -22,6 +22,22 @@ const directionOffset = {
   none: {},
 };
 
+// Check if user prefers reduced motion
+function usePrefersReducedMotion() {
+  const [prefersReduced, setPrefersReduced] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReduced(mql.matches);
+
+    const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  return prefersReduced;
+}
+
 export function ScrollAnimation({
   children,
   className,
@@ -34,20 +50,23 @@ export function ScrollAnimation({
 }: ScrollAnimationProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-80px" });
+  const prefersReduced = usePrefersReducedMotion();
 
   const variants: Variants = {
-    hidden: {
-      opacity: 0,
-      ...directionOffset[direction],
-    },
+    hidden: prefersReduced
+      ? {}
+      : {
+          opacity: 0,
+          ...directionOffset[direction],
+        },
     visible: stagger
       ? {
           opacity: 1,
           x: 0,
           y: 0,
           transition: {
-            staggerChildren: staggerDelay,
-            delayChildren: delay,
+            staggerChildren: prefersReduced ? 0 : staggerDelay,
+            delayChildren: prefersReduced ? 0 : delay,
           },
         }
       : {
@@ -55,8 +74,8 @@ export function ScrollAnimation({
           x: 0,
           y: 0,
           transition: {
-            duration,
-            delay,
+            duration: prefersReduced ? 0 : duration,
+            delay: prefersReduced ? 0 : delay,
             ease: [0.25, 0.46, 0.45, 0.94],
           },
         },

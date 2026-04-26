@@ -2,8 +2,7 @@
 
 import { Github, Mail, Phone, Heart } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-
-const currentYear = new Date().getFullYear();
+import { profileData } from "@/lib/constants";
 
 const footerLinks = [
   { name: "Home", href: "#home" },
@@ -20,6 +19,8 @@ export function Footer() {
       el.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative mt-10">
@@ -55,8 +56,9 @@ export function Footer() {
           {/* Social */}
           <div className="flex items-center justify-start sm:justify-end gap-3">
             <a
-              href="mailto:hs9961984@gmail.com"
+              href={`mailto:${profileData.email}`}
               className="p-2 rounded-lg text-muted-foreground hover:text-emerald-500 hover:bg-emerald-500/10 transition-all"
+              aria-label="Email"
             >
               <Mail className="size-5" />
               <span className="sr-only">Email</span>
@@ -64,15 +66,17 @@ export function Footer() {
             <a
               href="tel:+919464741376"
               className="p-2 rounded-lg text-muted-foreground hover:text-emerald-500 hover:bg-emerald-500/10 transition-all"
+              aria-label="Phone"
             >
               <Phone className="size-5" />
               <span className="sr-only">Phone</span>
             </a>
             <a
-              href="https://github.com/harman2212"
+              href={profileData.github}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg text-muted-foreground hover:text-emerald-500 hover:bg-emerald-500/10 transition-all"
+              aria-label="GitHub"
             >
               <Github className="size-5" />
               <span className="sr-only">GitHub</span>

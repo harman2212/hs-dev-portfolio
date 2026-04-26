@@ -1,28 +1,20 @@
 "use client";
 
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown, ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { profileData } from "@/lib/constants";
 
-const profileData = {
-  avatar: "https://avatars.githubusercontent.com/u/133370119?v=4",
-  name: "Harman",
-  title: "Full Stack Developer & AI Enthusiast",
-  tagline:
-    "Full Stack Developer specializing in Next.js, TypeScript, React & AI. Open to freelance projects.",
-  github: "https://github.com/harman2212",
-};
-
-// Floating particle positions
-const particles = Array.from({ length: 20 }, (_, i) => ({
-  id: i,
-  x: Math.random() * 100,
-  y: Math.random() * 100,
-  size: Math.random() * 4 + 2,
-  duration: Math.random() * 10 + 15,
-  delay: Math.random() * 5,
-}));
+// Seeded pseudo-random for consistent SSR/CSR rendering
+function seededRandom(seed: number) {
+  let s = seed;
+  return () => {
+    s = (s * 16807 + 0) % 2147483647;
+    return (s - 1) / 2147483646;
+  };
+}
 
 function TypingText({ text, delay = 0 }: { text: string; delay?: number }) {
   const characters = text.split("");
@@ -60,10 +52,29 @@ function TypingText({ text, delay = 0 }: { text: string; delay?: number }) {
 }
 
 export function Hero() {
+  // Generate particles client-side only to avoid hydration mismatch
+  const [mounted, setMounted] = useState(false);
+  const particles = useMemo(() => {
+    const rand = seededRandom(42);
+    return Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: rand() * 100,
+      y: rand() * 100,
+      size: rand() * 4 + 2,
+      duration: rand() * 10 + 15,
+      delay: rand() * 5,
+    }));
+  }, []);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      aria-labelledby="hero-heading"
     >
       {/* Animated gradient background */}
       <div className="absolute inset-0 -z-10">
@@ -78,30 +89,31 @@ export function Hero() {
         />
       </div>
 
-      {/* Floating particles */}
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full bg-emerald-500/30 dark:bg-emerald-500/40"
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            width: particle.size,
-            height: particle.size,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            x: [0, 15, 0],
-            opacity: [0.3, 0.8, 0.3],
-          }}
-          transition={{
-            duration: particle.duration,
-            delay: particle.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
+      {/* Floating particles - only render after mount to avoid hydration mismatch */}
+      {mounted &&
+        particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            className="absolute rounded-full bg-emerald-500/30 dark:bg-emerald-500/40"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: particle.size,
+              height: particle.size,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, 15, 0],
+              opacity: [0.3, 0.8, 0.3],
+            }}
+            transition={{
+              duration: particle.duration,
+              delay: particle.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
 
       {/* Grid pattern overlay */}
       <div
@@ -189,7 +201,7 @@ export function Hero() {
               asChild
             >
               <a
-                href="https://www.fiverr.com/harman2421"
+                href={profileData.fiverr}
                 target="_self"
               >
                 Hire Me on Fiverr
@@ -229,6 +241,7 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 2.5, duration: 0.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          aria-hidden="true"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}

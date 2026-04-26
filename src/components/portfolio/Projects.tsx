@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Star, GitFork, ExternalLink, Github, Loader2 } from "lucide-react";
+import { Star, GitFork, ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -34,35 +34,34 @@ const languageColors: Record<string, string> = {
   Shell: "bg-emerald-500",
 };
 
-const FallbackRepos: GitHubRepo[] = [
-  {
-    name: "nexusai-chat",
-    full_name: "harman2212/nexusai-chat",
-    description:
-      "AI-powered chat application built with Next.js 16, TypeScript, Prisma, and NextAuth",
-    html_url: "https://github.com/harman2212/nexusai-chat",
-    homepage: "https://nexusai-chat-self.vercel.app",
-    language: "TypeScript",
-    stargazers_count: 1,
-    forks_count: 0,
-    topics: ["aichatbot", "css", "java", "nextjs", "prisma", "typescript"],
-    created_at: "2026-04-25T07:53:17Z",
-    updated_at: "2026-04-25T08:39:13Z",
-  },
-  {
-    name: "Bank-Management-System",
-    full_name: "harman2212/Bank-Management-System",
-    description: "Desktop application built with Java, HTML, and SQLite",
-    html_url: "https://github.com/harman2212/Bank-Management-System",
-    homepage: null,
-    language: "HTML",
-    stargazers_count: 1,
-    forks_count: 0,
-    topics: [],
-    created_at: "2026-04-18T08:40:52Z",
-    updated_at: "2026-04-23T07:30:31Z",
-  },
-];
+function ProjectSkeleton() {
+  return (
+    <Card className="bg-card/50 border-border/50 backdrop-blur-sm h-full">
+      <CardHeader className="pb-0">
+        <div className="space-y-2">
+          <div className="h-5 w-3/4 bg-muted animate-pulse rounded" />
+          <div className="h-4 w-full bg-muted animate-pulse rounded" />
+          <div className="h-4 w-1/2 bg-muted animate-pulse rounded" />
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="flex flex-wrap gap-1.5">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="h-5 w-16 bg-muted animate-pulse rounded-full" />
+          ))}
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="h-4 w-16 bg-muted animate-pulse rounded" />
+          <div className="h-4 w-12 bg-muted animate-pulse rounded" />
+        </div>
+        <div className="flex items-center gap-2 pt-2">
+          <div className="h-8 w-28 bg-muted animate-pulse rounded-md" />
+          <div className="h-8 w-24 bg-muted animate-pulse rounded-md" />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
 
 function ProjectCard({
   repo,
@@ -191,14 +190,10 @@ export function Projects() {
           const data = await res.json();
           if (data.repos && data.repos.length > 0) {
             setRepos(data.repos);
-          } else {
-            setRepos(FallbackRepos);
           }
-        } else {
-          setRepos(FallbackRepos);
         }
       } catch {
-        setRepos(FallbackRepos);
+        // Silently handle - shows empty state
       } finally {
         setLoading(false);
       }
@@ -210,6 +205,7 @@ export function Projects() {
     <section
       id="projects"
       className="py-20 sm:py-28 relative"
+      aria-labelledby="projects-heading"
     >
       {/* Background accent */}
       <div className="absolute inset-0 -z-10">
@@ -219,7 +215,7 @@ export function Projects() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollAnimation>
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            <h2 id="projects-heading" className="text-3xl sm:text-4xl font-bold mb-4">
               My{" "}
               <span className="text-emerald-500">Projects</span>
             </h2>
@@ -232,14 +228,21 @@ export function Projects() {
         </ScrollAnimation>
 
         {loading ? (
-          <div className="flex justify-center py-16">
-            <Loader2 className="size-8 text-emerald-500 animate-spin" />
+          <div className="grid md:grid-cols-2 gap-6">
+            <ProjectSkeleton />
+            <ProjectSkeleton />
           </div>
-        ) : (
+        ) : repos.length > 0 ? (
           <div className="grid md:grid-cols-2 gap-6">
             {repos.map((repo, index) => (
               <ProjectCard key={repo.name} repo={repo} index={index} />
             ))}
+          </div>
+        ) : (
+          <div className="text-center py-16">
+            <p className="text-muted-foreground">
+              Projects are loading from GitHub. If this persists, check back later.
+            </p>
           </div>
         )}
 

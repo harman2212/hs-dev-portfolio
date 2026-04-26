@@ -1,31 +1,121 @@
 "use client";
 
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Star, GitFork, FolderGit2 } from "lucide-react";
+import { MapPin, Star, FolderGit2, Code2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ScrollAnimation } from "./ScrollAnimation";
+import { profileData } from "@/lib/constants";
 
-const profileData = {
-  avatar: "https://avatars.githubusercontent.com/u/133370119?v=4",
-  name: "Harman",
-  location: "India, Punjab",
-  bio: "Full Stack Developer specializing in Next.js, TypeScript, React & AI. Open to freelance projects. I love turning complex problems into elegant, user-friendly solutions. With experience in both frontend and backend technologies, I deliver end-to-end solutions that are scalable, performant, and visually stunning.",
-  company: "Freelance Full Stack Developer",
-  stats: [
-    { label: "Public Repos", value: "2+", icon: FolderGit2 },
-    { label: "GitHub Stars", value: "2", icon: Star },
-    { label: "Technologies", value: "10+", icon: GitFork },
-  ],
-};
+// Animated counter that counts up when in view
+function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          const duration = 1500;
+          const startTime = Date.now();
+
+          const animate = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * target));
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              setCount(target);
+            }
+          };
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [target]);
+
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
+interface GitHubStats {
+  public_repos: number;
+  stargazers_count: number;
+}
 
 export function About() {
+  const [githubStats, setGithubStats] = useState<GitHubStats | null>(null);
+
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const res = await fetch("/api/github");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.profile) {
+            const totalStars = (data.repos || []).reduce(
+              (sum: number, repo: { stargazers_count: number }) =>
+                sum + repo.stargazers_count,
+              0
+            );
+            setGithubStats({
+              public_repos: data.profile.public_repos || 0,
+              stargazers_count: totalStars,
+            });
+          }
+        }
+      } catch {
+        // Use fallback values
+      }
+    }
+    fetchStats();
+  }, []);
+
+  const stats = [
+    {
+      label: "Public Repos",
+      value: githubStats?.public_repos ?? 2,
+      suffix: "+",
+      icon: FolderGit2,
+    },
+    {
+      label: "GitHub Stars",
+      value: githubStats?.stargazers_count ?? 2,
+      suffix: "",
+      icon: Star,
+    },
+    {
+      label: "Technologies",
+      value: 10,
+      suffix: "+",
+      icon: Code2,
+    },
+  ];
+
   return (
-    <section id="about" className="py-20 sm:py-28">
+    <section id="about" className="py-20 sm:py-28" aria-labelledby="about-heading">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollAnimation>
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            <h2 id="about-heading" className="text-3xl sm:text-4xl font-bold mb-4">
               About{" "}
               <span className="text-emerald-500">Me</span>
             </h2>
@@ -84,7 +174,7 @@ export function About() {
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4">
-              {profileData.stats.map((stat, index) => (
+              {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, y: 20 }}
@@ -94,7 +184,9 @@ export function About() {
                   className="text-center p-4 rounded-xl bg-card/50 border border-border/50 backdrop-blur-sm hover:border-emerald-500/30 transition-colors group"
                 >
                   <stat.icon className="size-5 text-emerald-500 mx-auto mb-2 group-hover:scale-110 transition-transform" />
-                  <div className="text-2xl font-bold">{stat.value}</div>
+                  <div className="text-2xl font-bold">
+                    <AnimatedCounter target={stat.value} suffix={stat.suffix} />
+                  </div>
                   <div className="text-xs text-muted-foreground mt-1">
                     {stat.label}
                   </div>

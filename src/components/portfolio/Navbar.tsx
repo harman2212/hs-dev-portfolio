@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect, useSyncExternalStore } from "react";
+import { useState, useEffect, useSyncExternalStore, useCallback } from "react";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 import { Moon, Sun, Menu, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { profileData } from "@/lib/constants";
 
 const emptySubscribe = () => () => {};
 
@@ -33,20 +34,29 @@ export function Navbar() {
   const mounted = useMounted();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    let ticking = false;
 
-      // Determine active section
-      const sections = navLinks.map((link) => link.href.slice(1));
-      for (const section of sections.reverse()) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 150) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+
+          // Determine active section (iterate in reverse without mutating)
+          const sectionIds = navLinks.map((link) => link.href.slice(1));
+          for (let i = sectionIds.length - 1; i >= 0; i--) {
+            const section = sectionIds[i];
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 150) {
+                setActiveSection(section);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -54,13 +64,13 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = useCallback((href: string) => {
     setMobileOpen(false);
     const el = document.querySelector(href);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
-  };
+  }, []);
 
   return (
     <motion.header
@@ -73,12 +83,13 @@ export function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button
             onClick={() => handleNavClick("#home")}
             className="flex items-center gap-2 group"
+            aria-label="Go to top"
           >
             <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-bold text-sm transition-transform group-hover:scale-110">
               H
@@ -94,6 +105,7 @@ export function Navbar() {
               <button
                 key={link.name}
                 onClick={() => handleNavClick(link.href)}
+                aria-current={activeSection === link.href.slice(1) ? "page" : undefined}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   activeSection === link.href.slice(1)
                     ? "text-emerald-500 bg-emerald-500/10"
@@ -115,9 +127,10 @@ export function Navbar() {
               className="hidden sm:flex"
             >
               <a
-                href="https://github.com/harman2212"
+                href={profileData.github}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="GitHub Profile"
               >
                 <Github className="size-4" />
               </a>
@@ -130,6 +143,7 @@ export function Navbar() {
                 size="icon"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 className="transition-all"
+                aria-label="Toggle theme"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -181,7 +195,7 @@ export function Navbar() {
                     asChild
                   >
                     <a
-                      href="https://github.com/harman2212"
+                      href={profileData.github}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

@@ -4,19 +4,20 @@ import { Github, Mail, Phone, ExternalLink, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollAnimation } from "./ScrollAnimation";
+import { profileData } from "@/lib/constants";
 
 const contactOptions = [
   {
     name: "Email",
-    description: "hs9961984@gmail.com",
-    href: "mailto:hs9961984@gmail.com",
+    description: profileData.email,
+    href: `mailto:${profileData.email}`,
     icon: Mail,
     color: "text-emerald-500",
     bgColor: "bg-emerald-500/10",
   },
   {
     name: "Phone",
-    description: "+91 9464741376",
+    description: profileData.phone,
     href: "tel:+919464741376",
     icon: Phone,
     color: "text-emerald-500",
@@ -25,7 +26,7 @@ const contactOptions = [
   {
     name: "GitHub",
     description: "Check out my open source work and contributions",
-    href: "https://github.com/harman2212",
+    href: profileData.github,
     icon: Github,
     color: "text-white dark:text-neutral-200",
     bgColor: "bg-neutral-800 dark:bg-neutral-700",
@@ -37,6 +38,7 @@ export function Contact() {
     <section
       id="contact"
       className="py-20 sm:py-28 relative"
+      aria-labelledby="contact-heading"
     >
       {/* Background accent */}
       <div className="absolute inset-0 -z-10">
@@ -46,7 +48,7 @@ export function Contact() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollAnimation>
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            <h2 id="contact-heading" className="text-3xl sm:text-4xl font-bold mb-4">
               Let&apos;s Work{" "}
               <span className="text-emerald-500">Together</span>
             </h2>
@@ -117,7 +119,7 @@ export function Contact() {
                       asChild
                     >
                       <a
-                        href="https://www.fiverr.com/harman2421"
+                        href={profileData.fiverr}
                         target="_self"
                       >
                         Hire Me on Fiverr
@@ -130,9 +132,7 @@ export function Contact() {
                       className="border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-500 hover:border-emerald-500/50 px-8"
                       asChild
                     >
-                      <a
-                        href="mailto:hs9961984@gmail.com"
-                      >
+                      <a href={`mailto:${profileData.email}`}>
                         <Mail className="size-4" />
                         Send Email
                       </a>
