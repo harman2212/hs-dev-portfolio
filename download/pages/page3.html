@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page 3 - Best Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: 794px 1123px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; width: 794px; height: 1123px; overflow: hidden; background: #0a0f1c; font-family: 'Inter', sans-serif; }
+  .page { width: 794px; height: 1123px; position: relative; overflow: hidden; background: #0a0f1c; }
+  .bg-grid { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px); background-size: 50px 50px; z-index: 0; }
+  .glow { position: absolute; border-radius: 50%; filter: blur(100px); z-index: 0; }
+  .content { position: relative; z-index: 10; padding: 60px 64px; height: 100%; display: flex; flex-direction: column; }
+  .bar { width: 40px; height: 4px; border-radius: 2px; margin-bottom: 20px; background: linear-gradient(90deg, #22c55e, #4ade80); }
+  .label { font-size: 11px; font-weight: 700; color: #475569; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .heading { font-size: 38px; font-weight: 900; color: #fff; margin-bottom: 10px; letter-spacing: -1px; }
+  .sub { font-size: 14px; color: #64748b; margin-bottom: 28px; line-height: 1.6; }
+
+  .project { margin-bottom: 20px; }
+  .project-header { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .p-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .p-icon svg { width: 22px; height: 22px; }
+  .pi-blue { background: rgba(59,130,246,0.12); }
+  .pi-blue svg { fill: #3b82f6; }
+  .pi-amber { background: rgba(245,158,11,0.12); }
+  .pi-amber svg { fill: #f59e0b; }
+  .project-header h3 { font-size: 22px; font-weight: 800; color: #f1f5f9; letter-spacing: -0.5px; }
+  .project-type { font-size: 11px; color: #64748b; font-weight: 500; margin-top: 2px; }
+  .project-desc { font-size: 13px; color: #64748b; line-height: 1.7; margin-bottom: 12px; max-width: 620px; }
+  .feats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .feat { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #94a3b8; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 5px; padding: 4px 10px; }
+  .feat .ck { color: #22c55e; font-size: 12px; font-weight: 700; }
+  .tech-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .tech-tag { font-size: 10.5px; font-family: 'JetBrains Mono', monospace; font-weight: 500; color: #60a5fa; background: rgba(59,130,246,0.08); border-radius: 4px; padding: 3px 10px; }
+  .screenshot { width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); overflow: hidden; margin-bottom: 8px; }
+  .screenshot img { width: 100%; display: block; }
+  .screenshot .ph { width: 100%; height: 180px; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center; }
+  .screenshot .ph span { font-size: 12px; color: #334155; font-family: 'JetBrains Mono', monospace; }
+  .link { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #60a5fa; font-weight: 500; }
+  .link svg { width: 13px; height: 13px; fill: #60a5fa; }
+  .divider { width: 100%; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02), rgba(255,255,255,0.06)); margin: 24px 0; }
+  .pn { position: absolute; bottom: 36px; right: 64px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #334155; letter-spacing: 2px; z-index: 10; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="bg-grid"></div>
+  <div class="glow" style="width:300px;height:300px;background:#3b82f6;opacity:0.06;top:-60px;left:50%;"></div>
+  <div class="content">
+    <div class="bar"></div>
+    <div class="label">Featured Projects</div>
+    <div class="heading">Best Work</div>
+    <div class="sub">Real-world projects that demonstrate my skills in full stack development and AI integration.</div>
+
+    <div class="project">
+      <div class="project-header">
+        <div class="p-icon pi-blue"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div><h3>NexusAI</h3><div class="project-type">AI-Powered Chat Application</div></div>
+      </div>
+      <p class="project-desc">A production-ready AI chat application with ChatGPT-style UX, guest mode, dark theme, and full authentication. Features real-time AI responses with markdown rendering, syntax-highlighted code blocks, and conversation history.</p>
+      <div class="feats">
+        <div class="feat"><span class="ck">&#10003;</span> Real-time AI</div>
+        <div class="feat"><span class="ck">&#10003;</span> Guest mode</div>
+        <div class="feat"><span class="ck">&#10003;</span> Code blocks</div>
+        <div class="feat"><span class="ck">&#10003;</span> Chat history</div>
+        <div class="feat"><span class="ck">&#10003;</span> Dark/Light theme</div>
+        <div class="feat"><span class="ck">&#10003;</span> Responsive</div>
+      </div>
+      <div class="tech-row">
+        <div class="tech-tag">Next.js 16</div><div class="tech-tag">React 19</div><div class="tech-tag">TypeScript</div><div class="tech-tag">Prisma</div><div class="tech-tag">NextAuth</div><div class="tech-tag">Tailwind CSS</div>
+      </div>
+      <div class="screenshot"><img src="https://raw.githubusercontent.com/harman2212/nexusai-chat/main/screenshots/01-welcome-screen.png" alt="NexusAI" onerror="this.parentElement.innerHTML='<div class=\'ph\'><span>[ NexusAI Screenshot ]</span></div>'"></div>
+      <div class="link"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>github.com/harman2212/nexusai-chat</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="project">
+      <div class="project-header">
+        <div class="p-icon pi-amber"><svg viewBox="0 0 24 24"><path d="M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L2 6v2h19V6l-9.5-5z"/></svg></div>
+        <div><h3>Bank Management System</h3><div class="project-type">Desktop Banking Application</div></div>
+      </div>
+      <p class="project-desc">A fully functional desktop banking system with account management, transactions, analytics, and local database integration. Built as a complete full-stack desktop application with packaged executable.</p>
+      <div class="feats">
+        <div class="feat"><span class="ck">&#10003;</span> Account mgmt</div>
+        <div class="feat"><span class="ck">&#10003;</span> Transactions</div>
+        <div class="feat"><span class="ck">&#10003;</span> Analytics</div>
+        <div class="feat"><span class="ck">&#10003;</span> SQLite DB</div>
+        <div class="feat"><span class="ck">&#10003;</span> Packaged .exe</div>
+        <div class="feat"><span class="ck">&#10003;</span> User settings</div>
+      </div>
+      <div class="tech-row">
+        <div class="tech-tag">Java</div><div class="tech-tag">HTML/CSS</div><div class="tech-tag">SQLite</div>
+      </div>
+      <div class="screenshot"><img src="https://raw.githubusercontent.com/harman2212/Bank-Management-System/main/Screenshots/Dashboard.png" alt="Bank Management" onerror="this.parentElement.innerHTML='<div class=\'ph\'><span>[ Bank Management System Screenshot ]</span></div>'"></div>
+      <div class="link"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>github.com/harman2212/Bank-Management-System</div>
+    </div>
+  </div>
+  <div class="pn">03 / 05</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page 4 - What I Offer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: 794px 1123px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; width: 794px; height: 1123px; overflow: hidden; background: #0a0f1c; font-family: 'Inter', sans-serif; }
+  .page { width: 794px; height: 1123px; position: relative; overflow: hidden; background: #0a0f1c; }
+  .bg-grid { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px); background-size: 50px 50px; z-index: 0; }
+  .glow { position: absolute; border-radius: 50%; filter: blur(100px); z-index: 0; }
+  .content { position: relative; z-index: 10; padding: 80px 64px; height: 100%; display: flex; flex-direction: column; }
+  .bar { width: 40px; height: 4px; border-radius: 2px; margin-bottom: 24px; background: linear-gradient(90deg, #ef4444, #f87171); }
+  .label { font-size: 11px; font-weight: 700; color: #475569; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+  .heading { font-size: 42px; font-weight: 900; color: #fff; margin-bottom: 12px; letter-spacing: -1px; }
+  .sub { font-size: 15px; color: #64748b; margin-bottom: 40px; line-height: 1.6; }
+  .offers { display: flex; flex-direction: column; gap: 16px; flex: 1; align-content: center; justify-content: center; }
+  .offer { display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 24px 28px; }
+  .offer-num { font-size: 28px; font-weight: 900; color: rgba(59,130,246,0.2); font-family: 'JetBrains Mono', monospace; width: 44px; flex-shrink: 0; }
+  .offer-body { flex: 1; }
+  .offer-title { font-size: 18px; font-weight: 600; color: #e2e8f0; letter-spacing: -0.3px; margin-bottom: 4px; }
+  .offer-desc { font-size: 13px; color: #64748b; line-height: 1.5; }
+  .pn { position: absolute; bottom: 36px; right: 64px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #334155; letter-spacing: 2px; z-index: 10; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="bg-grid"></div>
+  <div class="glow" style="width:300px;height:300px;background:#8b5cf6;opacity:0.06;bottom:100px;right:-80px;"></div>
+  <div class="content">
+    <div class="bar"></div>
+    <div class="label">Services</div>
+    <div class="heading">What I Offer</div>
+    <div class="sub">Professional web development services tailored to your business needs and goals.</div>
+    <div class="offers">
+      <div class="offer">
+        <div class="offer-num">01</div>
+        <div class="offer-body">
+          <div class="offer-title">Landing Pages</div>
+          <div class="offer-desc">High-converting single page websites designed to capture leads and make a strong first impression.</div>
+        </div>
+      </div>
+      <div class="offer">
+        <div class="offer-num">02</div>
+        <div class="offer-body">
+          <div class="offer-title">Portfolio Websites</div>
+          <div class="offer-desc">Clean, modern portfolio sites with smooth animations and responsive design that showcase your work.</div>
+        </div>
+      </div>
+      <div class="offer">
+        <div class="offer-num">03</div>
+        <div class="offer-body">
+          <div class="offer-title">Business Websites</div>
+          <div class="offer-desc">Multi-page corporate websites with navigation, contact forms, and SEO optimization.</div>
+        </div>
+      </div>
+      <div class="offer">
+        <div class="offer-num">04</div>
+        <div class="offer-body">
+          <div class="offer-title">SaaS Frontends</div>
+          <div class="offer-desc">Modern application frontends with dashboard UI, authentication, and API integration.</div>
+        </div>
+      </div>
+      <div class="offer">
+        <div class="offer-num">05</div>
+        <div class="offer-body">
+          <div class="offer-title">Custom Web Applications</div>
+          <div class="offer-desc">Bespoke web solutions with full-stack development, database design, and deployment support.</div>
+        </div>
+      </div>
+      <div class="offer">
+        <div class="offer-num">06</div>
+        <div class="offer-body">
+          <div class="offer-title">AI Integration</div>
+          <div class="offer-desc">Add AI-powered features like chatbots, content generation, and smart search to your applications.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">04 / 05</div>
+</div>
+</body>
+</html>
