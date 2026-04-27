@@ -55,3 +55,5 @@ server.log
 # SQLite database (migrated to Vercel Postgres)
 /db/*.db
 /db/*.db-journal
+.vercel
+.env*.local

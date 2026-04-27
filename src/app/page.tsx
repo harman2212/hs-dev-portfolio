@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { Navbar } from "@/components/portfolio/Navbar"
 import { Hero } from "@/components/portfolio/Hero"
 import { About } from "@/components/portfolio/About"
@@ -8,17 +7,8 @@ import { Skills } from "@/components/portfolio/Skills"
 import { Projects } from "@/components/portfolio/Projects"
 import { Contact } from "@/components/portfolio/Contact"
 import { Footer } from "@/components/portfolio/Footer"
-import { AnalyticsDashboard } from "@/components/analytics/AnalyticsDashboard"
-import { Button } from "@/components/ui/button"
-import { BarChart3 } from 'lucide-react'
 
 export default function Home() {
-  const [showAnalytics, setShowAnalytics] = useState(false)
-
-  if (showAnalytics) {
-    return <AnalyticsDashboard onBack={() => setShowAnalytics(false)} />
-  }
-
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -31,17 +21,7 @@ export default function Home() {
       </main>
       <Footer />
 
-      {/* Analytics FAB */}
-      <Button
-        onClick={() => setShowAnalytics(true)}
-        size="sm"
-        className="fixed bottom-6 right-6 z-40 shadow-lg rounded-full h-12 w-12 p-0"
-        title="Open Analytics Dashboard"
-      >
-        <BarChart3 className="h-5 w-5" />
-      </Button>
-
-      {/* Visitor Tracker Script */}
+      {/* Visitor Tracker Script - runs silently in background */}
       <script dangerouslySetInnerHTML={{ __html: trackerScript() }} />
     </div>
   )
