@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: 1280px 769px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; width: 1280px; height: 769px; overflow: hidden; font-family: 'Inter', sans-serif; background: #080c18; }
+  .gig { width: 1280px; height: 769px; position: relative; overflow: hidden; background: #080c18; }
+  .bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./bg1.png') center/cover no-repeat; opacity: 0.4; }
+  .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(8,12,24,0.88) 0%, rgba(15,23,42,0.75) 50%, rgba(8,12,24,0.9) 100%); }
+  .grid-pattern { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px); background-size: 40px 40px; }
+
+  /* Glows */
+  .glow { position: absolute; border-radius: 50%; filter: blur(80px); }
+  .g1 { width: 300px; height: 300px; background: #3b82f6; opacity: 0.12; top: -80px; right: 250px; }
+  .g2 { width: 200px; height: 200px; background: #8b5cf6; opacity: 0.08; bottom: -40px; left: 100px; }
+
+  /* Left Content */
+  .left { position: absolute; top: 0; left: 0; width: 680px; height: 100%; z-index: 10; padding: 56px 56px 56px 64px; display: flex; flex-direction: column; justify-content: center; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.25); border-radius: 20px; padding: 6px 16px; width: fit-content; margin-bottom: 24px; }
+  .badge-dot { width: 7px; height: 7px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px rgba(34,197,94,0.5); }
+  .badge span { font-size: 11px; font-weight: 700; color: #60a5fa; letter-spacing: 2px; text-transform: uppercase; }
+  .main-title { font-size: 44px; font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 8px; letter-spacing: -1px; }
+  .main-title span { color: #60a5fa; }
+  .subtitle { font-size: 17px; color: #94a3b8; margin-bottom: 28px; font-weight: 400; }
+  .features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+  .feature { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #cbd5e1; font-weight: 500; }
+  .feature .icon { width: 22px; height: 22px; background: rgba(34,197,94,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .feature .icon svg { width: 12px; height: 12px; fill: #22c55e; }
+  .tech-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tech { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: #94a3b8; font-family: 'JetBrains Mono', monospace; }
+  .tech.hl { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.2); color: #60a5fa; }
+
+  /* Right side - Stats Cards */
+  .right { position: absolute; top: 0; right: 0; width: 500px; height: 100%; z-index: 10; padding: 56px 64px 56px 20px; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+  .stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px 22px; backdrop-filter: blur(10px); }
+  .stat-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .stat-num { font-size: 28px; font-weight: 900; color: #fff; font-family: 'JetBrains Mono', monospace; }
+  .stat-num.blue { color: #60a5fa; }
+  .stat-num.green { color: #4ade80; }
+  .stat-num.purple { color: #a78bfa; }
+  .stat-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+  .stat-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+  .stat-fill { height: 100%; border-radius: 2px; }
+  .sf-blue { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+  .sf-green { background: linear-gradient(90deg, #22c55e, #4ade80); }
+  .sf-purple { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+
+  /* Fiverr badge bottom */
+  .bottom-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4); z-index: 10; }
+  .fiverr-logo { position: absolute; bottom: 20px; right: 64px; z-index: 10; display: flex; align-items: center; gap: 8px; }
+  .fiverr-logo span { font-size: 11px; color: #475569; font-family: 'JetBrains Mono', monospace; }
+</style>
+</head>
+<body>
+<div class="gig">
+  <div class="bg"></div>
+  <div class="overlay"></div>
+  <div class="grid-pattern"></div>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+
+  <div class="left">
+    <div class="badge"><div class="badge-dot"></div><span>Full Stack Developer</span></div>
+    <div class="main-title">I Will Build a <span>Modern</span><br>Responsive Website</div>
+    <div class="subtitle">Next.js, React, TypeScript, Tailwind CSS</div>
+
+    <div class="features">
+      <div class="feature"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>Fast, SEO-optimized, and mobile-friendly</div>
+      <div class="feature"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>Clean code with smooth animations</div>
+      <div class="feature"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>Custom design — no templates</div>
+      <div class="feature"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>On-time delivery with revisions</div>
+    </div>
+
+    <div class="tech-row">
+      <div class="tech hl">Next.js</div>
+      <div class="tech hl">React</div>
+      <div class="tech hl">TypeScript</div>
+      <div class="tech">Tailwind</div>
+      <div class="tech">Node.js</div>
+      <div class="tech">PostgreSQL</div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="stat-card">
+      <div class="stat-top"><div class="stat-num blue">10+</div><div class="stat-label">Projects</div></div>
+      <div class="stat-bar"><div class="stat-fill sf-blue" style="width:85%"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-top"><div class="stat-num green">100%</div><div class="stat-label">Responsive</div></div>
+      <div class="stat-bar"><div class="stat-fill sf-green" style="width:100%"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-top"><div class="stat-num purple">8+</div><div class="stat-label">Technologies</div></div>
+      <div class="stat-bar"><div class="stat-fill sf-purple" style="width:75%"></div></div>
+    </div>
+  </div>
+
+  <div class="bottom-bar"></div>
+  <div class="fiverr-logo"><span>by Harman</span></div>
+</div>
+</body>
+</html>
